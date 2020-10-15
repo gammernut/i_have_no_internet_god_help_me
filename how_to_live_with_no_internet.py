@@ -188,9 +188,9 @@ def game_list(player):
             guessing_game(player)
         elif user_input_main_loop == '2':
             print('Starting Game \n')
-            player_1 = input('player 1 enter name\n')
+            player_1 = player
             player_2 = 'computer'
-            rpsmine.play_game(player_1, player_2)
+            play_game(player, player_2)
         elif user_input_main_loop == '3' and user_input_main_loop:
             print('Thanks for playing')
 
