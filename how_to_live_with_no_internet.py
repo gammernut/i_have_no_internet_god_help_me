@@ -1,6 +1,4 @@
 import utill
-# import game_code
-import rpsmine
 import os
 import random
 
