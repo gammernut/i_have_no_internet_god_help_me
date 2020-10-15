@@ -23,27 +23,29 @@ def main():
     players = ['Player 1', 'Player 2']
     active_player_index = 0
     player = players[active_player_index]
-    list_players(player, players)
+    # list_players(player, players)
     player_name = input('Hello player what is your name? \n')
     player = player_name
-    print(player)
-    list_players(player, players)
-    print()
-    user_input_main_loop = 'EMPTY'
-    while user_input_main_loop != '3' and user_input_main_loop:
-        user_input_main_loop = input(f'Hello {player} the chooses are (1)"play games","(3)EXIT"')
-        user_input_main_loop = user_input_main_loop.lower().strip()
-        if user_input_main_loop == "1":
-            os.system("cls")
-            print('loading')
-            game_list(player)
-        elif user_input_main_loop == '3' and user_input_main_loop:
-            print('Thanks for playing')
-    list_players(player, players)
+    # print(player)
+    # list_players(player, players)
+    first_choose(player, players)
     are_you_not_entertained()
 
 
 # start under here
+
+def first_choose(player, players):
+    user_input_main_loop = 'EMPTY'
+    while user_input_main_loop != '3':  # and user_input_main_loop:
+        user_input_main_loop = input(f'Hello {player} the chooses are (1)"play games","(3)EXIT"')
+        user_input_main_loop = user_input_main_loop.lower().strip()
+        if user_input_main_loop == "1":
+            os.system('cls')
+            print('loading')
+            game_list(player)
+        elif user_input_main_loop == '3':  # and user_input_main_loop:
+            print('Thanks for playing')
+    list_players(player, players)
 
 
 def end_it_all():
@@ -57,8 +59,6 @@ def let_the_games_begin():
 def whole_rps(player):
     utill.print_header('Rock Paper Scissors')
     player_1 = player
-
-    # player_1 = input('player 1 enter name\n')
     player_2 = 'computer'
     play_game(player_1, player_2)
 
@@ -75,15 +75,12 @@ def play_game(player_1, player_2):
         roll_2 = random.choice(roll_names)
 
         if not roll_1:
-            # print('really? its rock paper scissors not whatever the fuck that was\n')
             continue
 
         print(f'{player_1} rolls {roll_1}')
         print(f'{player_2} rolls {roll_2}')
 
         winner = check_for_winning_throw(player_1, player_2, roll_1, roll_2)
-
-        # print('the game is over!')
 
         if winner is None:
             print('this round was a tie!\n')
@@ -107,11 +104,9 @@ def find_winner(wins, names):
 def check_for_winning_throw(player_1, player_2, roll_1, roll_2):
     winner = None
     if roll_1 == roll_2:
-        # winner = None
         print('you tied!')
 
     outcome = rolls.get(roll_1, {})
-    # print(f"\n{roll_1} --> {outcome}'\n")
     if roll_2 in outcome.get('defeats'):
         return player_1
     elif roll_2 in outcome.get('defeated_by'):
@@ -120,16 +115,16 @@ def check_for_winning_throw(player_1, player_2, roll_1, roll_2):
     return winner
 
 
-def get_roll(player_name, roll_names):
+def get_roll(player, roll_names):
     print("Available rolls:")
     for index, r in enumerate(roll_names, start=1):  # index is a variable
         print(f"{index}. {r}")
 
-    text = input(f'\n{player_name} what is your roll?\n')
+    text = input(f'\n{player} what is your roll?\n')
     selected_index = int(text) - 1
 
     if selected_index < 0 or selected_index >= len(rolls):
-        print('do you even know what your doing? try agene \n')
+        print('do you even know what your doing? try again \n')
         return None
 
     return roll_names[selected_index]
@@ -163,6 +158,7 @@ def guessing_game(player):
         print(f'\nNope. The Number I was thinking of was {the_number}\n')
 
     print(f'you took {attempts} guesses.\n')
+    os.system('cls')
     print('play again?')
 
 
@@ -183,6 +179,7 @@ def game_list(player):
         user_input_main_loop = input('The games are "(1)guess the number" and "(2)RPS" or go (3)back')
         user_input_main_loop = user_input_main_loop.lower().strip()
         if user_input_main_loop == '1':
+            os.system('cls')
             print('Starting Game \n')
             print('You have seven tries')
             guessing_game(player)
